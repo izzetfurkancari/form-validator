@@ -10,7 +10,7 @@ function error (input) {
 }
 
 function succes (input) {
-
+    input.classList = "form-control is-valid";
 }
 
 form.addEventListener("submit", (e) => {
@@ -18,21 +18,21 @@ form.addEventListener("submit", (e) => {
     if(username.value == "") {
         error(username)
     } else {
-        username.classList = "form-control is-valid"
+        succes(username)
     }
     if(email.value == "") {
         error(email)
     } else {
-        email.classList = "form-control is-valid"
+        succes(username)
     }
     if(password.value == "") {
         error(password)
     } else {
-        password.classList = "form-control is-valid"
+        succes(username)
     }
     if(repassword.value == "") {
         error(repassword)
     } else {
-        repassword.classList = "form-control is-valid"
+        succes(username)
     }
 })  

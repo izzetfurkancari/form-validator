@@ -16,38 +16,29 @@ function succes (input) {
     input.classList = "form-control is-valid";
 }
 
-const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
+const checkEmail = (input) => {
+    const re =
+    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if (re.test(input.value)) {
+        succes(input)
+    } else {
+        error(input, "wrong email address")
+    }
   };
   
-form.addEventListener("submit", (e) => {
-    e.preventDefault()
-    if(username.value == "") {
-        error(username, "username necessary")
-    } else {
-        succes(username)
-    }
-    if(email.value == "") {
-        error(email, "email necessary")
-    }
-    else if(!validateEmail(email.value)) {
-        error(email, "Please enter a correct e-mail address")
-    }
-    else {
-        succes(email)
-    }
-    if(password.value == "") {
-        error(password, "password necessary")
-    } else {
-        succes(password)
-    }
-    if(repassword.value == "") {
-        error(repassword, "repassword necessary")
-    } else {
-        succes(repassword)
-    }
-})  
+  function checkRequired(inputs) {
+    inputs.forEach(input => {
+        if (input.value === "") {
+            error(input, `${input.id} is required`)
+        } else {
+            succes(input)
+        }
+    });
+  }
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault()
+
+        checkRequired([username,email,password,repassword]);
+        checkEmail(email)
+    })  
